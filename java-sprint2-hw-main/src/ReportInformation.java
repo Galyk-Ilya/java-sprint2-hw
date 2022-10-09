@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class ReportInformation {
     YearlyReport yearR = new YearlyReport();
     void monthReportInformation(HashMap<Integer, ArrayList<MonthlyReport>> MonthlyReport) {
-        if (DataReconciliation.Validation(MonthlyReport)) {
+        if (DataReconciliation.ValidationM(MonthlyReport)) {
             for (int i = 0; i < MonthlyReport.size(); i++) {
                 System.out.println(nameMonth(i));
                 double maxIncome = 0;
@@ -34,14 +34,14 @@ public class ReportInformation {
     }
 
     void yearReportInformation(HashMap<Integer, ArrayList<YearlyReport>> YearlyReport) {
-        if (DataReconciliation.Validation(YearlyReport)) {
+        if (DataReconciliation.ValidationY(YearlyReport)) {
 
-            System.out.println(YearlyReport.keySet() + " год.");
+            System.out.println(yearR.getKey() + " год.");
             double Income = 0;
             double Expenses = 0;
             double AmountOfExpenses = 0;
             double AmountOfIncome = 0;
-            int testMonth = 1;
+            int testMonth = 0;
             for (int j = 0; j < YearlyReport.get(yearR.getKey()).size(); j++) {
                 YearlyReport result = YearlyReport.get(yearR.getKey()).get(j);
                 testMonth++;
@@ -53,7 +53,7 @@ public class ReportInformation {
                     AmountOfExpenses += result.amount;
                 }
                 if (testMonth % 2 == 0) {
-                    System.out.println("Прибыль за " + nameMonth(testMonth) + ": " + (Income - Expenses));
+                    System.out.println("Прибыль за " + nameMonth(j / 2) + ": " + (Income - Expenses));
                 }
             }
             System.out.println("Средний расход за все месяцы в году: " + (AmountOfExpenses / YearlyReport.get(yearR.getKey()).size()));
@@ -64,40 +64,40 @@ public class ReportInformation {
     public String nameMonth(int month) {
         String nameMonth = "";
         switch (month) {
-            case (2):
+            case (0):
                 nameMonth = "Январь";
                 break;
-            case (4):
+            case (1):
                 nameMonth = "Февраль";
                 break;
-            case (6):
+            case (2):
                 nameMonth = "Март";
                 break;
-            case (8):
+            case (3):
                 nameMonth = "Апрель";
                 break;
-            case (10):
+            case (4):
                 nameMonth = "Май";
                 break;
-            case (12):
+            case (5):
                 nameMonth = "Июнь";
                 break;
-            case (14):
+            case (6):
                 nameMonth = "Июль";
                 break;
-            case (16):
+            case (7):
                 nameMonth = "Август";
                 break;
-            case (18):
+            case (8):
                 nameMonth = "Сентябрь";
                 break;
-            case (20):
+            case (9):
                 nameMonth = "Октябрь";
                 break;
-            case (22):
+            case (10):
                 nameMonth = "Ноябрь";
                 break;
-            case (24):
+            case (11):
                 nameMonth = "Декабрь";
                 break;
         }

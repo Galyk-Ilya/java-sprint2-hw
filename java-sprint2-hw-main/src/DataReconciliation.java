@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class DataReconciliation {
     YearlyReport yearR = new YearlyReport();
+
     ArrayList<ArrayList<Double>> calculationOf_Expenses_Income(HashMap<Integer, ArrayList<MonthlyReport>> ReportResultM) {
         ArrayList<ArrayList<Double>> result_Expenses_Income = new ArrayList<>();
         ArrayList<Double> AmountOfExpenses = new ArrayList<>();
@@ -59,17 +60,30 @@ public class DataReconciliation {
     }
 
     public static boolean Validation(HashMap<Integer, ArrayList<YearlyReport>> ReportResultY, ArrayList<ArrayList<Double>> result_Expenses_Income) {
-        if (ReportResultY.size() < 1 || result_Expenses_Income.size() < 1) {
-            System.out.println("Месячные или годовые отчеты не были считаны.");
+        if (ReportResultY.size() < 1 && result_Expenses_Income.get(0).size() < 1 && result_Expenses_Income.get(1).size() < 1) {
+            System.out.println("Годовой и месячные отчеты не были считаны.");
+        } else if (ReportResultY.size() < 1) {
+            System.out.println("Годовой отчет не был считан.");
+            return false;
+        } else if (result_Expenses_Income.get(0).size() < 1 && result_Expenses_Income.get(1).size() < 1) {
+            System.out.println("Месячные отчеты не были считаны.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean ValidationY(HashMap<Integer, ArrayList<YearlyReport>> ReportResultY) {
+        if (ReportResultY.size() < 1) {
+            System.out.println("Годовой отчет не был считан.");
             return false;
         } else {
             return true;
         }
     }
 
-    public static boolean Validation(HashMap ReportResultY) {
-        if (ReportResultY.size() < 1) {
-            System.out.println("Месячные или годовые отчеты не были считаны.");
+    public static boolean ValidationM(HashMap<Integer, ArrayList<MonthlyReport>> MonthlyReport) {
+        if (MonthlyReport.size() < 1) {
+            System.out.println("Месячные отчеты не были считаны.");
             return false;
         } else {
             return true;

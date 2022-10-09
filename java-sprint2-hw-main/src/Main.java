@@ -20,25 +20,39 @@ public class Main {
         HashMap<Integer, ArrayList<YearlyReport>> ReportReadingResultYears = new HashMap<>();
         HashMap<Integer, ArrayList<MonthlyReport>> ReportReadingResultMonth = new HashMap<>();
 
+        label:
         while (true) {
-            System.out.println("Введите команду:" + "\n1 - Считать все месячные отчёты;" + "\n2 - Считать годовой отчёт;" + "\n3 - Сверить отчёты;" + "\n4 - Вывести информацию о всех месячных отчётах;" + "\n5 - Вывести информацию о годовом отчёте;" + "\nexit - Выход.");
+            System.out.println("Введите команду:" + "\n" +
+                    "1 - Считать все месячные отчёты;" + "\n" +
+                    "2 - Считать годовой отчёт;" + "\n" +
+                    "3 - Сверить отчёты;" + "\n" +
+                    "4 - Вывести информацию о всех месячных отчётах;" + "\n" +
+                    "5 - Вывести информацию о годовом отчёте;" + "\n" +
+                    "exit - Выход.");
             String inPut = scanner.nextLine().trim();
-            if (COUNT_ALL_MONTHLY_REPORTS.equals(inPut)) {
-                ReportReadingResultMonth = monthlyReport.readFileContentsOrNull();
-                System.out.println("Месячные отчеты успешно считаны.");
-            } else if (CALCULATE_ANNUAL_REPORT.equals(inPut)) {
-                ReportReadingResultYears = yearlyReport.readFileContentsOrNull();
-                System.out.println("Годовой отчет успешно считан.");
-            } else if (VERIFY_REPORTS.equals(inPut)) {
-                dataReconciliation.reportComparison(ReportReadingResultYears, dataReconciliation.calculationOf_Expenses_Income(ReportReadingResultMonth));
-            } else if (DISPLAY_INFO_ABOUT_ALL_MONTHLY_REPORTS.equals(inPut)) {
-                inf.monthReportInformation(ReportReadingResultMonth);
-            } else if (OUTPUT_INFORMATION_ABOUT_ANNUAL_REPORT.equals(inPut)) {
-                inf.yearReportInformation(ReportReadingResultYears);
-            } else if (END_PROGRAM.equals(inPut)) {
-                break;
-            } else {
-                System.out.println("Команда отсутстует, повторите попытку.");
+            switch (inPut) {
+                case COUNT_ALL_MONTHLY_REPORTS:
+                    ReportReadingResultMonth = monthlyReport.readFileContentsOrNull();
+                    System.out.println("Месячные отчеты успешно считаны.");
+                    break;
+                case CALCULATE_ANNUAL_REPORT:
+                    ReportReadingResultYears = yearlyReport.readFileContentsOrNull();
+                    System.out.println("Годовой отчет успешно считан.");
+                    break;
+                case VERIFY_REPORTS:
+                    dataReconciliation.reportComparison(ReportReadingResultYears, dataReconciliation.calculationOf_Expenses_Income(ReportReadingResultMonth));
+                    break;
+                case DISPLAY_INFO_ABOUT_ALL_MONTHLY_REPORTS:
+                    inf.monthReportInformation(ReportReadingResultMonth);
+                    break;
+                case OUTPUT_INFORMATION_ABOUT_ANNUAL_REPORT:
+                    inf.yearReportInformation(ReportReadingResultYears);
+                    break;
+                case END_PROGRAM:
+                    break label;
+                default:
+                    System.out.println("Команда отсутстует, повторите попытку.");
+                    break;
             }
         }
     }

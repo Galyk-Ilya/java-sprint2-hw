@@ -25,7 +25,7 @@ public class YearlyReport {
         try {
             result = Files.readString(Path.of("java-sprint2-hw-main\\resources\\y." + getKey() + ".csv")); // считали файл и положили в result
 
-            String[] lines = result.split("\n");
+            String[] lines = result.split(System.lineSeparator());
             boolean is_expense = false;
             double quantity = 0.0;
             int sum_of_one = 0;
